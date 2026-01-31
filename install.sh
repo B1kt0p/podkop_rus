@@ -293,4 +293,4 @@ sing_box() {
     fi
 }
 
-main
+main "$@"
