@@ -183,27 +183,13 @@ main() {
     done
     if [ -n "$ru" ]; then
         if pkg_is_installed luci-i18n-podkop-ru; then
-                msg "Upgrading Russian translation..."
-                pkg_remove luci-i18n-podkop*
-                pkg_install "$DOWNLOAD_DIR/$ru"
-        else
-            msg "Русский язык интерфейса ставим? y/n (Install the Russian interface language?)"
-            while true; do
-                read -r -p '' RUS
-                case $RUS in
-                y)
-                    pkg_remove luci-i18n-podkop*
-                    pkg_install "$DOWNLOAD_DIR/$ru"
-                    break
-                    ;;
-                n)
-                    break
-                    ;;
-                *)
-                    echo "Введите y или n"
-                    ;;
-                esac
-            done
+            msg "Upgrading Russian translation..."
+            pkg_remove luci-i18n-podkop*
+            pkg_install "$DOWNLOAD_DIR/$ru"
+        elif [ "$1" = "-ru" ]; then  # Используем elif, чтобы избежать дублирования
+            msg "Installing Russian translation..."
+            pkg_remove luci-i18n-podkop*
+            pkg_install "$DOWNLOAD_DIR/$ru"
         fi
     fi
 
